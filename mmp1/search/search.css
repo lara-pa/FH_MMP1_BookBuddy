@@ -109,8 +109,33 @@ input {
     height: auto;
 }
 
+#bookdetailsUser {
+    padding: 40px;
+    margin: 0 0 0 30px;
+}
+
+#commentbutton,
+#addListButton {
+    background-color: #A3BFA8;
+    border: 1px solid #2E4057;
+    border-radius: 8px;
+    width: auto;
+    height: auto;
+    margin: 0 0 0 20px;
+    padding: 5px 20px;
+}
 
 
+
+
+
+@media (max-width: 1070px) {
+    #detailsbox {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
 
 @media (max-width: 770px) {
     #searchbox {
@@ -130,5 +155,41 @@ input {
 
     #singleresult {
         width: auto;
+    }
+
+    #detailsbox {
+        font-size: small;
+    }
+
+    #description {
+        width: auto;
+        height: auto;
+        padding: 0 30px 0 0;
+    }
+
+    #bookDetails {
+        display: flex;
+        flex-direction: column;
+        width: auto;
+        margin-left: 30px;
+    }
+
+    #detailsbox {
+        align-items: flex-start;
+        margin-left: 30px;
+    }
+
+    #bookdetailsUser {
+        padding: 0;
+    }
+}
+
+@media (max-width: 530px) {
+    #bookDetails {
+        margin-left: 10px;
+    }
+
+    #detailsbox {
+        margin-left: 10px;
     }
 }

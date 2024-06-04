@@ -19,3 +19,27 @@ Purpose: MultiMediaProjekt 1 */
 #friendsBox {
     margin: 0 0 0 40px
 }
+
+@media (max-width: 720px) {
+
+    #friendsBox {
+        font-size: small;
+    }
+
+    #friend_id {
+        width: 60px;
+    }
+
+    #addFriendButton {
+        width: auto;
+        height: auto;
+        padding: 10px 20px;
+    }
+
+    #addFriendForm {
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        align-items: center;
+    }
+}

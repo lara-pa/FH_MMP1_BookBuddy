@@ -34,7 +34,7 @@ if (!isset($_SESSION['username'])) {
                 <option value="wishlist">Wunschliste</option>
                 <option value="favourites">Lieblingbücher</option>
             </select>
-            <button
+            <button id="addListButton"
                 onclick="addToReadlist('<?php echo htmlspecialchars($_GET['title']); ?>', '<?php echo htmlspecialchars($_GET['authors']); ?>', '<?php echo htmlspecialchars($_GET['thumbnail']); ?>')">Hinzufügen</button>
         </div>
         <div>
@@ -71,13 +71,14 @@ if (!isset($_SESSION['username'])) {
                     $sth->execute([$encoded]);
                     $commentContent = $sth->fetchAll();
 
-
+                    echo "<h2>Kommentare</h2>";
 
                     foreach ($commentContent as $row) {
 
                         echo "<div>";
                         echo "<h3>$row->comments</h3>";
-                        echo "<h4>$row->username</h3>";
+                        echo "<h4>$row->username</h4>";
+                        echo "<hr>";
                         echo "</div>";
                     }
 

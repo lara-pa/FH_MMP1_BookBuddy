@@ -19,6 +19,49 @@ session_start();
     <script src="login/config.js"></script>
     <script src="search/search.js"></script>
     <script src="newbooks.js"></script>
+
+    <style>
+        .impressumbox {
+            background-color: #A3BFA8;
+            width: 500px;
+            height: 400px;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 50px 0;
+        }
+
+        .impressumbody {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 70px 0 0 0;
+        }
+
+        .impressumtext {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0;
+        }
+
+        @media (max-width: 800px) {
+
+            .impressumtext {
+                font-size: small;
+            }
+
+            .impressumbox {
+                width: auto;
+                height: auto;
+                padding: 10px 20px;
+                margin: 20px 40px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -49,34 +92,7 @@ session_start();
         </nav>
     </header>
 
-    <style>
-        .impressumbox {
-            background-color: #A3BFA8;
-            width: 500px;
-            height: 400px;
-            border-radius: 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 0 50px 0;
-        }
 
-        .impressumbody {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 70px 0 0 0;
-        }
-
-        .impressumtext {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 0;
-        }
-    </style>
 
     <div class="impressumbody">
         <div class="impressumbox">

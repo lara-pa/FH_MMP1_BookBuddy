@@ -49,3 +49,33 @@ Purpose: MultiMediaProjekt 1 */
     align-items: center;
     margin: 0 0 10px 0;
 }
+
+@media (max-width: 580px) {
+
+    .loginbox,
+    .logintitle,
+    .loginbuttondiv {
+        font-size: small;
+    }
+
+    .loginbox {
+        width: 250px;
+        height: auto;
+        padding: 20px 30px;
+        margin: 20px 0 0 0;
+    }
+
+    .logintitle {
+        width: 250px;
+        height: auto;
+        padding: 0 30px;
+    }
+
+    .loginbuttondiv {
+        margin: 30px 0 0 0;
+    }
+
+    input {
+        width: 200px;
+    }
+}
