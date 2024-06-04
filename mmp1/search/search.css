@@ -1,3 +1,7 @@
+/* Author: Lara Pantlitschko
+MultiMediaTechnology / FH Salzburg
+Purpose: MultiMediaProjekt 1 */
+
 input {
     width: 300px;
     height: 30px;
@@ -5,7 +9,7 @@ input {
 
 #searchbutton {
     background-color: #A3BFA8;
-    border-color: #2E4057;
+    border: 1px solid #2E4057;
     border-radius: 8px;
     width: 100px;
     height: 30px;
@@ -14,12 +18,17 @@ input {
 
 #searchquery {
     border-radius: 8px;
-    border-color: #A3BFA8;
+    border: 2px solid #A3BFA8;
 }
 
-#singleresult {}
+#singleresult {
+    width: 600px;
+    height: auto;
+}
 
-#results {
+#results,
+#mybooks {
+    padding: 20px;
     display: flex;
     flex-direction: column;
     width: auto;
@@ -47,15 +56,9 @@ input {
     margin-right: 20px;
 }
 
-/* #detailsbutton {
-    border-color: #2E4057;
-    background-color: transparent;
-    border-radius: 3%;
-    height: 30px;
-} */
-
 #detailsbutton {
-    padding: 10px 10px 10px;
+    padding: 10px 8px 10px;
+    width: 220px;
     outline: 0;
     border: 1px solid #2E4057;
     border-radius: 8px;
@@ -82,8 +85,50 @@ input {
     left: 0px;
 }
 
-@media (min-width: 768px) {
-    #detailsbutton {
-        padding: 10px 50px 10px;
+#bookDetails {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+}
+
+#detailsbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#detailsimg {
+    display: flex;
+    justify-content: center;
+    width: 148px;
+    height: 226px;
+}
+
+#description {
+    width: 500px;
+    height: auto;
+}
+
+
+
+
+@media (max-width: 770px) {
+    #searchbox {
+        font-size: small;
+        margin: 0 10px;
+    }
+
+    #resultbox {
+        font-size: small;
+        display: flex;
+    }
+
+    .book {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #singleresult {
+        width: auto;
     }
 }

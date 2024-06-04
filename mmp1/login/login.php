@@ -1,20 +1,36 @@
+<!-- Author: Lara Pantlitschko
+MultiMediaTechnology / FH Salzburg
+Purpose: MultiMediaProjekt 1 -->
+
 <?php
 $pagetitle = "Login";
 include "../header.php";
 ?>
 
-<form method="post" action="loginhandling.php">
-    <h3><label for="username">Username:</label></h3>
-    <input type="text" name="username" id="username" required>
+<script>
+    function linktoRegister() {
+        window.location.href = 'register.php';
+    }
+</script>
 
-    <h3><label for="password">Password:</label></h3>
-    <input type="password" name="password" id="password" required>
+<form class="loginform" method="post" action="loginhandling.php">
+    <div class="logintitle">
+        <h2>Login</h2>
+    </div>
+    <div class="loginbox">
+        <h3><label for="username">Username:</label></h3>
+        <input type="text" name="username" id="username" required>
 
-    <br><br>
+        <h3><label for="password">Passwort:</label></h3>
+        <input type="password" name="password" id="password" required>
 
-    <button type="submit" name="submit">Login</button>
+        <div class="loginbuttondiv">
+            <button class="login" type="submit" name="submit">Login</button>
+            <button class="login" onclick="linktoRegister()">Registrieren</button>
+        </div>
+    </div>
 </form>
-<button><a href="register.php">Registrieren</a></button>
+
 
 <?php
 

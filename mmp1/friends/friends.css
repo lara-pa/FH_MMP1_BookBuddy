@@ -1,0 +1,21 @@
+/* Author: Lara Pantlitschko
+MultiMediaTechnology / FH Salzburg
+Purpose: MultiMediaProjekt 1 */
+
+#friend_id {
+    border-radius: 8px;
+    border: 2px solid #A3BFA8;
+}
+
+#addFriendButton {
+    background-color: #A3BFA8;
+    border: 1px solid #2E4057;
+    border-radius: 8px;
+    width: 200px;
+    height: 30px;
+    margin: 0 0 0 20px;
+}
+
+#friendsBox {
+    margin: 0 0 0 40px
+}

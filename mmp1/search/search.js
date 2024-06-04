@@ -1,7 +1,10 @@
+// Author: Lara Pantlitschko
+// MultiMediaTechnology / FH Salzburg
+// Purpose: MultiMediaProjekt 1
 
 async function searchBooks() {
     const query = document.getElementById('searchquery').value;
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${apiKey}&maxResults=10`;
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${apiKey}&maxResults=20&orderBy=relevance`;
 
     try {
         const response = await fetch(url);
@@ -62,4 +65,21 @@ function showDetails(index) {
     });
 
     window.location.href = `details.php?${params.toString()}`;
+}
+
+
+function addToReadlist(title, authors, thumbnail) {
+
+    const list = document.getElementById('list-select').value;
+
+    var link = "../readlist/list_save.php?list=" + list + "&bookTitle=" + title + "&bookAuthor=" + authors + "&bookThumbnail=" + thumbnail;
+    window.location.href = link;
+}
+
+function addComment(title, authors) {
+
+    const comment = document.getElementById('comment').value;
+
+    var link = "comment_add.php?comment=" + comment + "&bookTitle=" + title + "&bookAuthor=" + authors;
+    window.location.href = link;
 }

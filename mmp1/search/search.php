@@ -1,3 +1,7 @@
+<!-- Author: Lara Pantlitschko
+MultiMediaTechnology / FH Salzburg
+Purpose: MultiMediaProjekt 1 -->
+
 <?php
 include "../header.php";
 ?>

@@ -1,8 +1,11 @@
-<?php
-include "functions.php";
-include "header.php";
+<!-- Author: Lara Pantlitschko
+MultiMediaTechnology / FH Salzburg
+Purpose: MultiMediaProjekt 1 -->
 
-if (!isset($_SESSION['USER'])) {
+<?php
+include "../header.php";
+
+if (!isset($_SESSION['username'])) {
   header("Location: login.php");
   exit;
 } else {
@@ -20,7 +23,7 @@ if (!isset($_SESSION['USER'])) {
         $sth = $dbh->prepare("UPDATE newuser SET email = ?, username = ? WHERE username = ?");
         $sth->execute([$email, $username, $original_username]);
       }
-      header("Location: user_list.php");
+      header("Location: ../index.php");
       exit;
     } catch (PDOException $e) {
       if ($e->getCode() == '23505') {

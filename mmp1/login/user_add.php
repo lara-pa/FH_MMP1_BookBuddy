@@ -1,22 +1,28 @@
+<!-- Author: Lara Pantlitschko
+MultiMediaTechnology / FH Salzburg
+Purpose: MultiMediaProjekt 1 -->
+
 <?php
 include "../header.php";
 
-
 $sth_check = $dbh->prepare("SELECT COUNT(*) FROM newuser WHERE username = ?");
-$sth_check->execute(array($username));
+$sth_check->execute(array(htmlspecialchars($_POST['username'])));
 $count = $sth_check->fetchColumn();
 
 if ($count == 0) {
+  $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
   $sth = $dbh->prepare("INSERT INTO newuser (email, username, password) VALUES (?, ?, ?)");
   $sth->execute(
     array(
       htmlspecialchars($_POST['email']),
       htmlspecialchars($_POST['username']),
-      htmlspecialchars($_POST['password']),
+      $hashed_password
     )
   );
-  header("Location: ../index.php");
+  header("Location: login.php");
   exit;
 } else {
-  echo "Error: Der Benutzername existiert bereits. Bitte versuchen Sie es erneut:<a href='user_add.php'>Zurückgehen</a>";
+  echo "Error: Der Benutzername existiert bereits. Bitte versuchen Sie es erneut: <a href='user_add.php'>Zurückgehen</a>";
 }
+?>
