@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS readlist;
 DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS friends;
 DROP TABLE IF EXISTS newuser;
+DROP TABLE IF EXISTS books;
 
 CREATE TABLE newuser (
     user_id SERIAL PRIMARY KEY,
@@ -39,3 +40,25 @@ CREATE TABLE friends (
     FOREIGN KEY (user_id) REFERENCES newuser(user_id),
     FOREIGN KEY (friend_id) REFERENCES newuser(user_id)
 );
+
+
+CREATE TABLE books (
+    book_id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    author VARCHAR(255),
+    published_date DATE,
+    description TEXT,
+    thumbnail VARCHAR(255)
+);
+
+ALTER TABLE readlist ADD COLUMN book_id INT NULL;
+ALTER TABLE comments ADD COLUMN book_id INT NULL;
+
+ALTER TABLE readlist ADD CONSTRAINT fk_orders_books FOREIGN KEY (book_id) REFERENCES books(book_id);
+ALTER TABLE readlist MODIFY book_id INT NOT NULL;
+
+ALTER TABLE comments ADD CONSTRAINT fk_reviews_books FOREIGN KEY (book_id) REFERENCES books(book_id);
+ALTER TABLE comments MODIFY book_id INT NOT NULL;
+
+ALTER TABLE readlist DROP COLUMN book_json;
+ALTER TABLE comments DROP COLUMN book_json;
