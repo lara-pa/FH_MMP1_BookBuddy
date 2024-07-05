@@ -75,7 +75,13 @@ $friends = $sth_friends->fetchAll();
     <h3>Freunde</h3>
     <ul>
         <?php foreach ($friends as $friend): ?>
-            <li><?php echo htmlspecialchars($friend->friend_username) ?></li>
+            <li>
+                <?php if ($userId == $friend->requester_id) { ?>
+                    <?php echo htmlspecialchars($friend->friend_username) ?>
+                <?php } else { ?>
+                    <?php echo htmlspecialchars($friend->requester_username) ?>
+                <?php } ?>
+            </li>
         <?php endforeach; ?>
     </ul>
 </div>
