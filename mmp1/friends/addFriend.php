@@ -6,6 +6,12 @@ Purpose: MultiMediaProjekt 1 -->
 <?php
 include "../header.php";
 
+if (!isset($_SESSION['user_id'])) {
+    http_response_code(401);
+    echo json_encode(['error' => 'Unauthorized']);
+    exit;
+}
+
 // Freundschaftsanfrage senden
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'add_friend') {
     $userId = $_POST['user_id'];

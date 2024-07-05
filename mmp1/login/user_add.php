@@ -6,7 +6,7 @@ Purpose: MultiMediaProjekt 1 -->
 include "../header.php";
 
 $sth_check = $dbh->prepare("SELECT COUNT(*) FROM newuser WHERE username = ?");
-$sth_check->execute(array(htmlspecialchars($_POST['username'])));
+$sth_check->execute(array(($_POST['username'])));
 $count = $sth_check->fetchColumn();
 
 if ($count == 0) {
@@ -15,8 +15,8 @@ if ($count == 0) {
   $sth = $dbh->prepare("INSERT INTO newuser (email, username, password) VALUES (?, ?, ?)");
   $sth->execute(
     array(
-      htmlspecialchars($_POST['email']),
-      htmlspecialchars($_POST['username']),
+      ($_POST['email']),
+      ($_POST['username']),
       $hashed_password
     )
   );

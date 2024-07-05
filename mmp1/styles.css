@@ -36,6 +36,10 @@ a:hover {
     text-decoration-color: #A3BFA8;
 }
 
+label {
+    padding-right: 10px;
+}
+
 
 /* -- header -- */
 

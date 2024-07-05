@@ -54,7 +54,7 @@ if (!$book) {
                 onclick="addToReadlist('<?php echo htmlspecialchars($book['title']); ?>', '<?php echo htmlspecialchars($book['author']); ?>', '<?php echo htmlspecialchars($book['thumbnail']); ?>')">Hinzufügen</button>
         </div>
         <div>
-            <input type="text" id="comment" placeholder="Schreibe hier einen Kommentar">
+            <label for="comment">Schreibe einen Kommentar</label><input type="text" id="comment">
             <button
                 onclick="addComment('<?php echo htmlspecialchars($book['title']); ?>', '<?php echo htmlspecialchars($book['author']); ?>')"
                 id="commentbutton">Posten</button>

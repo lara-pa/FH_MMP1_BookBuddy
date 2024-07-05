@@ -76,11 +76,11 @@ $friends = $sth_friends->fetchAll();
     <ul>
         <?php foreach ($friends as $friend): ?>
             <li>
-                <?php if ($userId == $friend->requester_id) { ?>
+                <?php if ($userId == $friend->requester_id): ?>
                     <?php echo htmlspecialchars($friend->friend_username) ?>
-                <?php } else { ?>
+                <?php elseif ($userId == $friend->friend_id): ?>
                     <?php echo htmlspecialchars($friend->requester_username) ?>
-                <?php } ?>
+                <?php endif; ?>
             </li>
         <?php endforeach; ?>
     </ul>

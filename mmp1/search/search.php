@@ -7,7 +7,7 @@ include "../header.php";
 ?>
 
 <div id="searchbox">
-    <input type="text" id="searchquery" placeholder="Buchtitel oder Autor">
+    <label for="searchquery">Buchtitel oder Autor </label><input type="text" id="searchquery">
     <button onclick="searchBooks()" id="searchbutton">Suchen</button>
 </div>
 

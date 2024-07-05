@@ -3,6 +3,12 @@ MultiMediaTechnology / FH Salzburg
 Purpose: MultiMediaProjekt 1 -->
 
 <?php
+if (!isset($_SESSION['user_id'])) {
+    http_response_code(401);
+    echo json_encode(['error' => 'Unauthorized']);
+    exit;
+}
+
 header('Content-Type: application/json');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);

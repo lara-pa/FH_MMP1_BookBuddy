@@ -6,7 +6,6 @@ Purpose: MultiMediaProjekt 1 -->
 $pagetitle = "Benutzer bearbeiten";
 include "../header.php";
 
-
 if (isset($_SESSION['username'])) {
     if (isset($_GET['username']) && !empty($_GET['username'])) {
         $username = htmlspecialchars($_GET['username']);

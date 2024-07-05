@@ -5,6 +5,12 @@ Purpose: MultiMediaProjekt 1 -->
 <?php
 include "../header.php";
 
+if (!isset($_SESSION['user_id'])) {
+    http_response_code(401);
+    echo json_encode(['error' => 'Unauthorized']);
+    exit;
+}
+
 $tables = [
     'readlist' => 'readlist_id',
     'comments' => 'comment_id'

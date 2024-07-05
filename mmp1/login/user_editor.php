@@ -5,15 +5,21 @@ Purpose: MultiMediaProjekt 1 -->
 <?php
 include "../header.php";
 
+if (!isset($_SESSION['user_id'])) {
+  http_response_code(401);
+  echo json_encode(['error' => 'Unauthorized']);
+  exit;
+}
+
 if (!isset($_SESSION['username'])) {
   header("Location: login.php");
   exit;
 } else {
   if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $email = htmlspecialchars($_POST['email']);
-    $username = htmlspecialchars($_POST['username']);
-    $original_username = htmlspecialchars($_POST['original_username']);
-    $password = !empty($_POST['password']) ? password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT) : null;
+    $email = ($_POST['email']);
+    $username = ($_POST['username']);
+    $original_username = ($_POST['original_username']);
+    $password = !empty($_POST['password']) ? password_hash(($_POST['password']), PASSWORD_DEFAULT) : null;
 
     try {
       if ($password) {
