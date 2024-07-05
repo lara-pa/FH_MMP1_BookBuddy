@@ -4,22 +4,16 @@
 
 async function searchBooks() {
     const query = document.getElementById('searchquery').value;
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${apiKey}&maxResults=20&orderBy=relevance`;
+    const url = `../api/api.php?query=${encodeURIComponent(query)}`;
 
     try {
         const response = await fetch(url);
         if (!response.ok) {
-            throw new Error('Network response war nicht in Ordnung: ' + response.statusText);
+            throw new Error('Network response was not ok: ' + response.statusText);
         }
-        const data = await response.json();
-        if (!data.items) {
-            throw new Error('Keine Daten gefunden.');
-        }
-        window.bookItems = data.items;
-        displayResults(data);
     } catch (error) {
         console.error('Fehler:', error);
-        document.getElementById('results').innerHTML = 'Fehler beim Fetchen der Google Books API Daten: ' + error.message;
+        document.getElementById('results').innerHTML = 'Fehler beim Abrufen der Bücher: ' + error.message;
     }
 }
 
@@ -27,13 +21,11 @@ function displayResults(data) {
     const resultsDiv = document.getElementById('results');
     resultsDiv.innerHTML = '';
 
-    if (data.items) {
-        data.items.forEach((item, index) => {
-            const volumeInfo = item.volumeInfo;
-            const title = volumeInfo.title || 'Kein Titel';
-            const authors = volumeInfo.authors ? volumeInfo.authors.join(', ') : 'Kein Autor';
-            const imageLinks = volumeInfo.imageLinks;
-            const thumbnail = imageLinks ? imageLinks.thumbnail : '';
+    if (data.length > 0) {
+        data.forEach((item, index) => {
+            const title = item.title || 'Kein Titel';
+            const authors = item.author || 'Kein Autor';
+            const thumbnail = item.thumbnail || '';
 
             const bookDiv = document.createElement('div');
             bookDiv.classList.add('book');
@@ -53,18 +45,8 @@ function displayResults(data) {
 }
 
 function showDetails(index) {
-    const book = window.bookItems[index].volumeInfo;
-    const params = new URLSearchParams({
-        thumbnail: book.imageLinks ? book.imageLinks.thumbnail : '',
-        title: book.title || 'Kein Titel',
-        authors: book.authors ? book.authors.join(', ') : 'Kein Autor',
-        description: book.description || 'Keine Beschreibung verfügbar',
-        publisher: book.publisher || 'Unbekannt',
-        publishedDate: book.publishedDate || 'Unbekannt',
-        pageCount: book.pageCount || 'Unbekannt'
-    });
-
-    window.location.href = `details.php?${params.toString()}`;
+    const book = window.bookItems[index];
+    window.location.href = `details.php?book_id=${book.book_id}`;
 }
 
 

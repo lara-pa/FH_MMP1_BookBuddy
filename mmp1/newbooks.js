@@ -2,7 +2,7 @@
 // MultiMediaTechnology / FH Salzburg
 // Purpose: MultiMediaProjekt 1
 
-const genres = ['Adult', 'Romance', 'Crime', 'Thriller', 'Fantasy'];
+const genres = ['Thriller', 'Romance', 'Crime', 'Fantasy'];
 const maxResultsPerGenre = 3;
 
 async function fetchBooksByGenre(genre, maxResults, apiKey) {

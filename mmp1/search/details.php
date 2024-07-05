@@ -9,20 +9,36 @@ if (!isset($_SESSION['username'])) {
     header("Location: ../login/login.php");
     exit;
 }
+
+$bookId = $_GET['book_id'] ?? null;
+
+if ($bookId === null) {
+    echo "Buch-ID fehlt.";
+    exit;
+}
+
+$stmt = $dbh->prepare("SELECT * FROM books WHERE book_id = :book_id");
+$stmt->execute([':book_id' => $bookId]);
+$book = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$book) {
+    echo "Buch nicht gefunden.";
+    exit;
+}
+
 ?>
 
 <div id="detailsbox">
     <div id="bookDetails">
-        <?php if (!empty($_GET['thumbnail'])): ?>
-            <img src="<?php echo htmlspecialchars($_GET['thumbnail']); ?>" alt="Coverbild" id="detailsimg">
+        <?php if (!empty($book['thumbnail'])): ?>
+            <img src="<?php echo htmlspecialchars($book['thumbnail']); ?>" alt="Coverbild" id="detailsimg">
         <?php endif; ?>
-        <h2><?php echo htmlspecialchars($_GET['title'] ?? 'Kein Titel'); ?></h2>
-        <h3><?php echo htmlspecialchars($_GET['authors'] ?? 'Kein Autor'); ?></h3>
-        <p id="description"><?php echo htmlspecialchars($_GET['description'] ?? 'Keine Beschreibung verfügbar'); ?></p>
-        <p><strong>Verlag:</strong> <?php echo htmlspecialchars($_GET['publisher'] ?? 'Unbekannt'); ?></p>
+        <h2><?php echo htmlspecialchars($book['title']); ?></h2>
+        <h3><?php echo htmlspecialchars($book['author']); ?></h3>
+        <p id="description"><?php echo htmlspecialchars($book['description'] ?? 'Keine Beschreibung verfügbar'); ?></p>
+        <p><strong>Verlag:</strong> <?php echo htmlspecialchars($book['publisher'] ?? 'Unbekannt'); ?></p>
         <p><strong>Erstveröffentlichung:</strong>
-            <?php echo htmlspecialchars($_GET['publishedDate'] ?? 'Unbekannt'); ?></p>
-        <p><strong>Seitenanzahl:</strong> <?php echo htmlspecialchars($_GET['pageCount'] ?? 'Unbekannt'); ?></p>
+            <?php echo htmlspecialchars($book['published_date'] ?? 'Unbekannt'); ?></p>
     </div>
     <div id="bookdetailsUser">
         <div>
@@ -35,53 +51,31 @@ if (!isset($_SESSION['username'])) {
                 <option value="favourites">Lieblingbücher</option>
             </select>
             <button id="addListButton"
-                onclick="addToReadlist('<?php echo htmlspecialchars($_GET['title']); ?>', '<?php echo htmlspecialchars($_GET['authors']); ?>', '<?php echo htmlspecialchars($_GET['thumbnail']); ?>')">Hinzufügen</button>
+                onclick="addToReadlist('<?php echo htmlspecialchars($book['title']); ?>', '<?php echo htmlspecialchars($book['author']); ?>', '<?php echo htmlspecialchars($book['thumbnail']); ?>')">Hinzufügen</button>
         </div>
         <div>
             <input type="text" id="comment" placeholder="Schreibe hier einen Kommentar">
             <button
-                onclick="addComment('<?php echo htmlspecialchars($_GET['title']); ?>', '<?php echo htmlspecialchars($_GET['authors']); ?>')"
+                onclick="addComment('<?php echo htmlspecialchars($book['title']); ?>', '<?php echo htmlspecialchars($book['author']); ?>')"
                 id="commentbutton">Posten</button>
-            <div id="commetsection">
+            <div id="commentsection">
 
                 <?php
+                $stmt = $dbh->prepare("SELECT c.comment_id, u.username, c.comments 
+                                      FROM comments c
+                                      JOIN newuser u ON c.user_id = u.user_id
+                                      WHERE c.book_id = :book_id");
+                $stmt->execute([':book_id' => $bookId]);
+                $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+                echo "<h2>Kommentare</h2>";
 
-                $title = $_GET['title'];
-                $authors = $_GET['authors'];
-
-                if (isset($title) && isset($authors)) {
-
-                    class Book
-                    {
-                        public $title;
-                        public $author;
-                    }
-
-                    $book = new Book();
-                    $book->title = $title;
-                    $book->author = $authors;
-                    $encoded = json_encode($book);
-
-
-                    $sth = $dbh->prepare("SELECT c.comment_id, u.username, c.comments, c.books
-                                            FROM comments c
-                                            JOIN newuser u ON c.user_id = u.user_id
-                                            WHERE c.books::json::text = ?::json::text;");
-                    $sth->execute([$encoded]);
-                    $commentContent = $sth->fetchAll();
-
-                    echo "<h2>Kommentare</h2>";
-
-                    foreach ($commentContent as $row) {
-
-                        echo "<div>";
-                        echo "<h3>$row->comments</h3>";
-                        echo "<h4>$row->username</h4>";
-                        echo "<hr>";
-                        echo "</div>";
-                    }
-
+                foreach ($comments as $row) {
+                    echo "<div>";
+                    echo "<h3>" . htmlspecialchars($row['comments']) . "</h3>";
+                    echo "<h4>" . htmlspecialchars($row['username']) . "</h4>";
+                    echo "<hr>";
+                    echo "</div>";
                 }
                 ?>
             </div>
